@@ -10,13 +10,16 @@ class Wishlist(CommonModel):
     )
     rooms = models.ManyToManyField(
         "rooms.Room",
+        related_name="whishlists",
     )
     experiences = models.ManyToManyField(
         "experiences.Experience",
+        related_name="whishlists",
     )
     user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="whishlists",
     )
 
     def __str__(self):
