@@ -14,13 +14,14 @@ class WordFilter(admin.SimpleListFilter):
             ("great", "Great"),
             ("awesome", "Awesome"),
         ]
-    
+
     def queryset(self, request, reviews):
         word = self.value()
         if word:
             return reviews.filter(payload__contains=word)
         else:
             reviews
+
 
 class RatingFilter(admin.SimpleListFilter):
 
@@ -31,9 +32,9 @@ class RatingFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return [
             ("three_or_more", "Three OR MORE"),
-            ("less_than_three", "Less than three")
+            ("less_than_three", "Less than three"),
         ]
-    
+
     def queryset(self, request, reviews):
         rating = self.value()
         if rating == "three_or_more":
@@ -45,9 +46,10 @@ class RatingFilter(admin.SimpleListFilter):
         else:
             return reviews
 
+
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    
+
     list_display = (
         "__str__",
         "payload",
